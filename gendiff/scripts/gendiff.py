@@ -1,8 +1,15 @@
 #!/usr/bin/env python3
+import argparse
 
 
 def main():
-    print("Test")
+    parser = argparse.ArgumentParser(
+        description='Generate diff.'
+    )
+    parser.add_argument('first_file')
+    parser.add_argument('second_file')
+    parser.add_argument('-f', dest='format', help='output format')
+    parser.parse_args()
 
 
 if __name__ == '__main__':
