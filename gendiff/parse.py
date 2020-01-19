@@ -6,8 +6,8 @@ parse_by_ext = {
 }
 
 
-def parse(content, ext):
+def parse(file_descriptor, ext):
     try:
-        return parse_by_ext[ext](content)
+        return parse_by_ext[ext](file_descriptor)
     except KeyError:
         raise ValueError('File extension can be .json, .yaml or .ini')

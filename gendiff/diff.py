@@ -7,8 +7,7 @@ from .formatters import render_diff
 def get_file_data(filepath):
     _, ext = os.path.splitext(filepath)
     with open(filepath, 'r') as f:
-        content = f.read()
-        return parse(content, ext)
+        return parse(f, ext)
 
 
 def generate_diff(path_to_file1, path_to_file2, format):
