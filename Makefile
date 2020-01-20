@@ -20,4 +20,7 @@ test:
 	pytest
 
 coverage:
+	pytest --cov=gendiff/ tests/
+
+coverage-xml:
 	pytest --cov=gendiff/ tests/ --cov-report xml
