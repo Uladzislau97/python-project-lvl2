@@ -6,3 +6,4 @@ env/
 .pypirc
 .vscode
 .coverage
+coverage.xml
