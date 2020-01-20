@@ -15,3 +15,9 @@ clear:
 
 lint:
 	@poetry run flake8 gendiff
+
+test:
+	pytest
+
+test-coverage:
+	pytest --cov=gendiff/ tests/
