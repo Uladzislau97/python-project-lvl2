@@ -29,6 +29,7 @@ argparse = "^1.4"
 flake8 = "^3.7"
 pytest = "^5.3.4"
 pytest-cov = "^2.8.1"
+PyYAML = "^5.3"
 
 [tool.poetry.scripts]
 gendiff = "gendiff.scripts.run:main"

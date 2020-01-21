@@ -1,5 +1,5 @@
 import os
-from .parse import parse
+from .parsers import parse
 from .builder import build_diff_ast
 from .formatters import render_diff
 
