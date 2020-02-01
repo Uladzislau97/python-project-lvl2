@@ -36,7 +36,7 @@ def test_complex_yaml_diff():
     with open(path.abspath('tests/fixtures/diff_2'), 'r') as f:
         expected_result = f.read()
         actual_result = generate_diff(
-            path.abspath('tests/fixtures/yaml_complex_1.json'),
-            path.abspath('tests/fixtures/yaml_complex_2.json')
+            path.abspath('tests/fixtures/yaml_complex_1.yml'),
+            path.abspath('tests/fixtures/yaml_complex_2.yml')
         )
         assert actual_result == expected_result
