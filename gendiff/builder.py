@@ -3,6 +3,8 @@ def detect_key_type(key, first_data, second_data):
         return 'removed'
     elif (key not in first_data) and (key in second_data):
         return 'added'
+    elif (type(first_data[key]) is dict) and (type(second_data[key]) is dict):
+        return 'complex'
     elif first_data[key] == second_data[key]:
         return 'unchanged'
     elif first_data[key] != second_data[key]:
@@ -24,6 +26,9 @@ def build_diff_ast(first_data, second_data):
 
     for key in keys:
         key_type = detect_key_type(key, first_data, second_data)
+        if key_type == 'complex':
+            children = build_diff_ast(first_data[key], second_data[key])
+            node = {'type': key_type, 'key': key, 'children': children}
         if key_type == 'removed':
             value = first_data[key]
             node = {'type': key_type, 'key': key, 'value': value}
