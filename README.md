@@ -12,3 +12,6 @@
 #
 ##### COMPARING YAML FILES
 [![asciicast](https://asciinema.org/a/3t2WeRaHBgTUqmD1VukdzijS7.svg)](https://asciinema.org/a/3t2WeRaHBgTUqmD1VukdzijS7)
+#
+##### COMPARING FILES WITH NESTINGS
+[![asciicast](https://asciinema.org/a/CVMxqSgortcDFUg0sme79y94u.svg)](https://asciinema.org/a/CVMxqSgortcDFUg0sme79y94u)
