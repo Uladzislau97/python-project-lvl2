@@ -16,4 +16,4 @@ def parse(file_descriptor, ext):
     try:
         return parse_by_ext[ext](file_descriptor)
     except KeyError:
-        raise ValueError('File extension can be .json, .yml or .ini')
+        raise ValueError('File extension can be .json or .yml')
