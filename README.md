@@ -15,3 +15,6 @@
 #
 ##### COMPARING FILES WITH NESTINGS
 [![asciicast](https://asciinema.org/a/CVMxqSgortcDFUg0sme79y94u.svg)](https://asciinema.org/a/CVMxqSgortcDFUg0sme79y94u)
+#
+##### DIFF IN PLAIN FORMAT
+[![asciicast](https://asciinema.org/a/q40GHzJsZFHnzRwC9qXYnVQRI.svg)](https://asciinema.org/a/q40GHzJsZFHnzRwC9qXYnVQRI)
