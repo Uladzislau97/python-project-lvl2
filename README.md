@@ -18,3 +18,6 @@
 #
 ##### DIFF IN PLAIN FORMAT
 [![asciicast](https://asciinema.org/a/q40GHzJsZFHnzRwC9qXYnVQRI.svg)](https://asciinema.org/a/q40GHzJsZFHnzRwC9qXYnVQRI)
+#
+##### DIFF IN JSON FORMAT
+[![asciicast](https://asciinema.org/a/lcNqGvaqlJIh9pGgLon0UrNrn.svg)](https://asciinema.org/a/lcNqGvaqlJIh9pGgLon0UrNrn)
