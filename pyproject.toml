@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "uladzislau97_gendiff"
-version = "1.3.0"
+version = "1.4.0"
 description = "Compares two configuration files and shows a difference."
 authors = ["Uladzislau Vasilyeu <VSvasilyev97@gmail.com>"]
 readme = "README.md"
