@@ -3,7 +3,6 @@
 __pycache__
 dist/
 env/
-.pypirc
 .vscode
 .coverage
 coverage.xml

@@ -5,7 +5,7 @@ build: clear
 	@poetry build
 
 publish: build
-	twine upload --repository testpypi dist/* --config-file .pypirc
+	@poetry publish --repository testpypi
 
 run:
 	@poetry run gendiff
