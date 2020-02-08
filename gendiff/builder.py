@@ -1,7 +1,10 @@
 def detect_key_type(key, first_data, second_data):
-    if (key in first_data) and (key not in second_data):
+    first_keys = set(first_data.keys())
+    second_keys = set(second_data.keys())
+
+    if (key in first_keys) and (key not in second_keys):
         return 'removed'
-    elif (key not in first_data) and (key in second_data):
+    elif (key not in first_keys) and (key in second_keys):
         return 'added'
     elif (type(first_data[key]) is dict) and (type(second_data[key]) is dict):
         return 'complex'
