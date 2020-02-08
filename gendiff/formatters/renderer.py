@@ -1,6 +1,7 @@
 import json
-from .nested import render_nested_diff
-from.plain import render_plain_diff
+
+from gendiff.formatters.nested import render_nested_diff
+from gendiff.formatters.plain import render_plain_diff
 
 
 render_by_format = {

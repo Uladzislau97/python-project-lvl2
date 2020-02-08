@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 import argparse
-from gendiff import generate_diff
 from os import path
+
+from gendiff import generate_diff
 
 
 def main():

@@ -1,7 +1,8 @@
 import os
-from .parsers import parse
-from .builder import build_diff_ast
-from .formatters import render_diff
+
+from gendiff.parsers import parse
+from gendiff.builder import build_diff_ast
+from gendiff.formatters import render_diff
 
 
 def get_file_data(filepath):
