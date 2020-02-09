@@ -1,10 +1,9 @@
 from os import path
 
-import json
-
 from gendiff import generate_diff
 from gendiff.formatters.nested import render_nested_diff
 from gendiff.formatters.plain import render_plain_diff
+from gendiff.formatters.json import render_json_diff
 
 
 def compare(filepath1, filepath2, expected_result_filepath,
@@ -65,5 +64,5 @@ def test_json_formated_diff():
         'tests/fixtures/yaml_complex_1.yml',
         'tests/fixtures/yaml_complex_2.yml',
         'tests/fixtures/diff_4',
-        renderer=json.dumps
+        renderer=render_json_diff
     )
