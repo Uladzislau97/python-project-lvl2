@@ -1,3 +1,6 @@
+from gendiff import node_types
+
+
 def stringify(data):
     if type(data) is dict:
         return '[complex value]'
@@ -11,20 +14,20 @@ def stringify(data):
 def render_iter(data, parents=[]):
     nodes_representation = []
     for node in data:
-        if node['type'] == 'complex':
+        if node['type'] == node_types.COMPLEX:
             new_parents = parents + [node['key']]
             content = render_iter(node['children'], new_parents)
             nodes_representation.append(content)
-        elif node['type'] == 'added':
+        elif node['type'] == node_types.ADDED:
             name = '.'.join(parents + [node['key']])
             value = stringify(node['value'])
             content = f"Property '{name}' was added with value: {value}"
             nodes_representation.append(content)
-        elif node['type'] == 'removed':
+        elif node['type'] == node_types.REMOVED:
             name = '.'.join(parents + [node['key']])
             content = f"Property '{name}' was removed"
             nodes_representation.append(content)
-        elif node['type'] == 'updated':
+        elif node['type'] == node_types.UPDATED:
             name = '.'.join(parents + [node['key']])
             old_value = stringify(node['old_value'])
             new_value = stringify(node['new_value'])

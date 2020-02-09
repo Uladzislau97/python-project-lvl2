@@ -1,3 +1,6 @@
+from gendiff import node_types
+
+
 INDENT_LENGTH = 4
 
 
@@ -19,27 +22,27 @@ def render_iter(diff_data, depth=0):
     indentation = ' ' * INDENT_LENGTH * depth
     nodes_representation = []
     for node in diff_data:
-        if node['type'] == 'complex':
+        if node['type'] == node_types.COMPLEX:
             children = render_iter(node['children'], depth + 1)
             nodes_representation.append(
                 f"{indentation}    {node['key']}: {children}"
             )
-        if node['type'] == 'removed':
+        if node['type'] == node_types.REMOVED:
             value = stringify(node['value'], depth + 1)
             nodes_representation.append(
                 f"{indentation}  - {node['key']}: {value}"
             )
-        elif node['type'] == 'added':
+        elif node['type'] == node_types.ADDED:
             value = stringify(node['value'], depth + 1)
             nodes_representation.append(
                 f"{indentation}  + {node['key']}: {value}"
             )
-        elif node['type'] == 'unchanged':
+        elif node['type'] == node_types.UNCHANGED:
             value = stringify(node['value'], depth + 1)
             nodes_representation.append(
                 f"{indentation}    {node['key']}: {value}"
             )
-        elif node['type'] == 'updated':
+        elif node['type'] == node_types.UPDATED:
             old_value = stringify(node['old_value'], depth + 1)
             nodes_representation.append(
                 f"{indentation}  - {node['key']}: {old_value}"

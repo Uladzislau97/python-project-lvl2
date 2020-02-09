@@ -1,0 +1,5 @@
+REMOVED = 'removed'
+ADDED = 'added'
+COMPLEX = 'complex'
+UNCHANGED = 'unchanged'
+UPDATED = 'updated'
