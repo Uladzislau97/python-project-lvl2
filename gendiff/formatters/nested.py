@@ -7,7 +7,7 @@ INDENT_LENGTH = 4
 def stringify(data, depth):
     if type(data) is bool:
         return str(data).lower()
-    if type(data) is not dict:
+    if not isinstance(data, dict):
         return str(data)
     indentation = ' ' * INDENT_LENGTH * depth
     keys_representation = []
