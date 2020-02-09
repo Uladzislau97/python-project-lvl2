@@ -1,4 +1,4 @@
-def detect_key_type(key, first_data, second_data):
+def detect_node_type(key, first_data, second_data):
     first_keys = set(first_data.keys())
     second_keys = set(second_data.keys())
 
@@ -28,24 +28,24 @@ def build_diff_ast(first_data, second_data):
     ast = []
 
     for key in keys:
-        key_type = detect_key_type(key, first_data, second_data)
-        if key_type == 'complex':
+        node_type = detect_node_type(key, first_data, second_data)
+        if node_type == 'complex':
             children = build_diff_ast(first_data[key], second_data[key])
-            node = {'type': key_type, 'key': key, 'children': children}
-        if key_type == 'removed':
+            node = {'type': node_type, 'key': key, 'children': children}
+        if node_type == 'removed':
             value = first_data[key]
-            node = {'type': key_type, 'key': key, 'value': value}
-        elif key_type == 'added':
+            node = {'type': node_type, 'key': key, 'value': value}
+        elif node_type == 'added':
             value = second_data[key]
-            node = {'type': key_type, 'key': key, 'value': value}
-        elif key_type == 'unchanged':
+            node = {'type': node_type, 'key': key, 'value': value}
+        elif node_type == 'unchanged':
             value = first_data[key]
-            node = {'type': key_type, 'key': key, 'value': value}
-        elif key_type == 'updated':
+            node = {'type': node_type, 'key': key, 'value': value}
+        elif node_type == 'updated':
             old_value = first_data[key]
             new_value = second_data[key]
             node = {
-                'type': key_type,
+                'type': node_type,
                 'key': key,
                 'old_value': old_value,
                 'new_value': new_value
