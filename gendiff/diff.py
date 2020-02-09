@@ -2,7 +2,6 @@ import os
 
 from gendiff.parsers import parse
 from gendiff.builder import build_diff_ast
-from gendiff.formatters import render_diff
 
 
 def get_file_data(filepath):
@@ -11,8 +10,8 @@ def get_file_data(filepath):
         return parse(f, ext)
 
 
-def generate_diff(path_to_file1, path_to_file2, format=None):
+def generate_diff(path_to_file1, path_to_file2, render):
     file1_data = get_file_data(path_to_file1)
     file2_data = get_file_data(path_to_file2)
     diff_data = build_diff_ast(file1_data, file2_data)
-    return render_diff(diff_data, format)
+    return render(diff_data)
