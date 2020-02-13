@@ -14,26 +14,28 @@ def stringify(data):
 def render_iter(data, parents=[]):
     nodes_representation = []
     for node in data:
-        if node['type'] == node_types.COMPLEX:
-            new_parents = parents + [node['key']]
+        node_type = node['type']
+        node_key = node['key']
+        name = '.'.join(parents + [node_key])
+
+        if node_type == node_types.COMPLEX:
+            new_parents = parents + [node_key]
             content = render_iter(node['children'], new_parents)
-            nodes_representation.append(content)
-        elif node['type'] == node_types.ADDED:
-            name = '.'.join(parents + [node['key']])
+        elif node_type == node_types.ADDED:
             value = stringify(node['value'])
             content = f"Property '{name}' was added with value: {value}"
-            nodes_representation.append(content)
-        elif node['type'] == node_types.REMOVED:
-            name = '.'.join(parents + [node['key']])
+        elif node_type == node_types.REMOVED:
             content = f"Property '{name}' was removed"
-            nodes_representation.append(content)
-        elif node['type'] == node_types.UPDATED:
-            name = '.'.join(parents + [node['key']])
+        elif node_type == node_types.UPDATED:
             old_value = stringify(node['old_value'])
             new_value = stringify(node['new_value'])
             content = f"Property '{name}' was updated. " + \
                 f"From {old_value} to {new_value}"
-            nodes_representation.append(content)
+        else:
+            continue
+
+        nodes_representation.append(content)
+
     return '\n'.join(nodes_representation)
 
 
