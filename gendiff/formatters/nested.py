@@ -22,35 +22,29 @@ def render_iter(diff_data, depth=0):
     indentation = ' ' * INDENT_LENGTH * depth
     nodes_representation = []
     for node in diff_data:
-        if node['type'] == node_types.COMPLEX:
+        node_type = node['type']
+        if node_type == node_types.COMPLEX:
             children = render_iter(node['children'], depth + 1)
-            nodes_representation.append(
-                f"{indentation}    {node['key']}: {children}"
-            )
-        if node['type'] == node_types.REMOVED:
+            node_data = ((' ', children),)
+        elif node_type == node_types.REMOVED:
             value = stringify(node['value'], depth + 1)
-            nodes_representation.append(
-                f"{indentation}  - {node['key']}: {value}"
-            )
-        elif node['type'] == node_types.ADDED:
+            node_data = (('-', value),)
+        elif node_type == node_types.ADDED:
             value = stringify(node['value'], depth + 1)
-            nodes_representation.append(
-                f"{indentation}  + {node['key']}: {value}"
-            )
-        elif node['type'] == node_types.UNCHANGED:
+            node_data = (('+', value),)
+        elif node_type == node_types.UNCHANGED:
             value = stringify(node['value'], depth + 1)
-            nodes_representation.append(
-                f"{indentation}    {node['key']}: {value}"
-            )
-        elif node['type'] == node_types.UPDATED:
+            node_data = ((' ', value),)
+        elif node_type == node_types.UPDATED:
             old_value = stringify(node['old_value'], depth + 1)
-            nodes_representation.append(
-                f"{indentation}  - {node['key']}: {old_value}"
-            )
             new_value = stringify(node['new_value'], depth + 1)
+            node_data = (('-', old_value), ('+', new_value))
+
+        for sign, val in node_data:
             nodes_representation.append(
-                f"{indentation}  + {node['key']}: {new_value}"
+                f"{indentation}  {sign} {node['key']}: {val}"
             )
+
     content = '\n'.join(nodes_representation)
     result = f"{'{'}\n{content}\n{indentation}{'}'}"
     return result
