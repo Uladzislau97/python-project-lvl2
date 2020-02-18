@@ -13,7 +13,7 @@ def stringify(data):
 
 def format(data, parents=()):
     nodes_representation = []
-    for node in data:
+    for node in sorted(data, key=lambda node: node['key']):
         node_type = node['type']
         node_key = node['key']
         name = '.'.join(parents + (node_key,))

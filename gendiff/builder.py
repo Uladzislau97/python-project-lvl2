@@ -9,7 +9,7 @@ def build_diff_ast(first_data, second_data):
     keys = first_keys | second_keys
     ast = []
 
-    for key in sorted(keys):
+    for key in keys:
         if key in removed_keys:
             value = first_data[key]
             node = {'type': node_types.REMOVED, 'key': key, 'value': value}

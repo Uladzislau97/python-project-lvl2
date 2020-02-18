@@ -18,13 +18,13 @@ def stringify(data, depth):
     return f"{'{'}\n{content}\n{indentation}{'}'}"
 
 
-def render_iter(diff_data, depth=0):
+def format(data, depth=0):
     indentation = ' ' * INDENT_LENGTH * depth
     nodes_representation = []
-    for node in diff_data:
+    for node in sorted(data, key=lambda node: node['key']):
         node_type = node['type']
         if node_type == node_types.COMPLEX:
-            children = render_iter(node['children'], depth + 1)
+            children = format(node['children'], depth + 1)
             node_data = ((' ', children),)
         else:
             value = stringify(node['value'], depth + 1)
@@ -46,7 +46,3 @@ def render_iter(diff_data, depth=0):
     content = '\n'.join(nodes_representation)
     result = f"{'{'}\n{content}\n{indentation}{'}'}"
     return result
-
-
-def format(diff_data):
-    return render_iter(diff_data)
