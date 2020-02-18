@@ -1,57 +1,47 @@
 from gendiff import node_types
 
 
-def detect_node_type(key, first_data, second_data):
+def build_diff_ast(first_data, second_data):
     first_keys = set(first_data.keys())
     second_keys = set(second_data.keys())
-
-    if (key in first_keys) and (key not in second_keys):
-        return node_types.REMOVED
-    elif (key not in first_keys) and (key in second_keys):
-        return node_types.ADDED
-    elif (type(first_data[key]) is dict) and (type(second_data[key]) is dict):
-        return node_types.COMPLEX
-    elif first_data[key] == second_data[key]:
-        return node_types.UNCHANGED
-    elif first_data[key] != second_data[key]:
-        return node_types.UPDATED
-
-
-def build_diff_ast(first_data, second_data):
-    keys = []
-
-    for key in first_data:
-        if key not in keys:
-            keys.append(key)
-
-    for key in second_data:
-        if key not in keys:
-            keys.append(key)
-
+    removed_keys = first_keys - second_keys
+    added_keys = second_keys - first_keys
+    keys = first_keys | second_keys
     ast = []
 
-    for key in keys:
-        node_type = detect_node_type(key, first_data, second_data)
-        if node_type == node_types.COMPLEX:
-            children = build_diff_ast(first_data[key], second_data[key])
-            node = {'type': node_type, 'key': key, 'children': children}
-        if node_type == node_types.REMOVED:
+    for key in sorted(keys):
+        if key in removed_keys:
             value = first_data[key]
-            node = {'type': node_type, 'key': key, 'value': value}
-        elif node_type == node_types.ADDED:
+            node = {'type': node_types.REMOVED, 'key': key, 'value': value}
+        elif key in added_keys:
             value = second_data[key]
-            node = {'type': node_type, 'key': key, 'value': value}
-        elif node_type == node_types.UNCHANGED:
-            value = first_data[key]
-            node = {'type': node_type, 'key': key, 'value': value}
-        elif node_type == node_types.UPDATED:
-            old_value = first_data[key]
-            new_value = second_data[key]
-            node = {
-                'type': node_type,
-                'key': key,
-                'old_value': old_value,
-                'new_value': new_value
-            }
+            node = {'type': node_types.ADDED, 'key': key, 'value': value}
+        else:
+            first_value = first_data[key]
+            second_value = second_data[key]
+
+            if (
+                isinstance(first_value, dict) and
+                isinstance(second_value, dict)
+            ):
+                children = build_diff_ast(first_value, second_value)
+                node = {
+                    'type': node_types.COMPLEX,
+                    'key': key,
+                    'children': children
+                }
+            elif first_value == second_value:
+                node = {
+                    'type': node_types.UNCHANGED,
+                    'key': key,
+                    'value': first_value
+                }
+            else:
+                node = {
+                    'type': node_types.UPDATED,
+                    'key': key,
+                    'old_value': first_value,
+                    'new_value': second_value
+                }
         ast.append(node)
     return ast
