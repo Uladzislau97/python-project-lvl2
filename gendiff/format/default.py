@@ -50,5 +50,5 @@ def render_iter(diff_data, depth=0):
     return result
 
 
-def render_nested_diff(diff_data):
+def format(diff_data):
     return render_iter(diff_data)

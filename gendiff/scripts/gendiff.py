@@ -4,25 +4,22 @@ from os import path
 import argparse
 
 from gendiff import generate_diff
-from gendiff.formatters.nested import render_nested_diff
-from gendiff.formatters.plain import render_plain_diff
-from gendiff.formatters.json import render_json_diff
+from gendiff import format
 
 
-render_by_format = {
-    'nested': render_nested_diff,
-    'plain': render_plain_diff,
-    'json': render_json_diff
-}
-
-
-def renderer(format):
-    try:
-        if format is None:
-            format = 'nested'
-        return render_by_format[format]
-    except KeyError:
-        raise ValueError('Diff format can be nested, plain or json')
+def formatter(name):
+    if name == format.JSON:
+        return format.json
+    elif name == format.PLAIN:
+        return format.plain
+    elif name == format.DEFAULT:
+        return format.default
+    raise argparse.ArgumentTypeError(
+        'Unknown formatter: "{}". Use one of this: {}'.format(
+            name,
+            ', '.join(format.FORMATTERS),
+        )
+    )
 
 
 def main():
@@ -32,15 +29,16 @@ def main():
     parser.add_argument('first_file')
     parser.add_argument('second_file')
     parser.add_argument(
-        '-f', '--format', dest='format',
-        help='set format of output', type=renderer
+        '-f', '--format',
+        help='set format of output',
+        type=formatter,
+        default=format.DEFAULT
     )
 
     args = parser.parse_args()
     first_file_path = path.abspath(args.first_file)
     second_file_path = path.abspath(args.second_file)
-    render = args.format
-    diff = generate_diff(first_file_path, second_file_path, render)
+    diff = generate_diff(first_file_path, second_file_path, args.format)
     print(diff)
 
 

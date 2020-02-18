@@ -39,5 +39,5 @@ def render_iter(data, parents=[]):
     return '\n'.join(nodes_representation)
 
 
-def render_plain_diff(diff_data):
+def format(diff_data):
     return render_iter(diff_data)
