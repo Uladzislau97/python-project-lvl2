@@ -41,7 +41,7 @@ def build_diff_ast(first_data, second_data):
                     'type': node_types.UPDATED,
                     'key': key,
                     'old_value': first_value,
-                    'new_value': second_value
+                    'value': second_value
                 }
         ast.append(node)
     return ast

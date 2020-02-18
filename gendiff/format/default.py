@@ -26,19 +26,17 @@ def render_iter(diff_data, depth=0):
         if node_type == node_types.COMPLEX:
             children = render_iter(node['children'], depth + 1)
             node_data = ((' ', children),)
-        elif node_type == node_types.REMOVED:
+        else:
             value = stringify(node['value'], depth + 1)
-            node_data = (('-', value),)
-        elif node_type == node_types.ADDED:
-            value = stringify(node['value'], depth + 1)
-            node_data = (('+', value),)
-        elif node_type == node_types.UNCHANGED:
-            value = stringify(node['value'], depth + 1)
-            node_data = ((' ', value),)
-        elif node_type == node_types.UPDATED:
-            old_value = stringify(node['old_value'], depth + 1)
-            new_value = stringify(node['new_value'], depth + 1)
-            node_data = (('-', old_value), ('+', new_value))
+            if node_type == node_types.REMOVED:
+                node_data = (('-', value),)
+            elif node_type == node_types.ADDED:
+                node_data = (('+', value),)
+            elif node_type == node_types.UNCHANGED:
+                node_data = ((' ', value),)
+            elif node_type == node_types.UPDATED:
+                old_value = stringify(node['old_value'], depth + 1)
+                node_data = (('-', old_value), ('+', value))
 
         for sign, val in node_data:
             nodes_representation.append(

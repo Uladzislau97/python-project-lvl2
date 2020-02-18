@@ -28,7 +28,7 @@ def format(data, parents=()):
             content = f"Property '{name}' was removed"
         elif node_type == node_types.UPDATED:
             old_value = stringify(node['old_value'])
-            new_value = stringify(node['new_value'])
+            new_value = stringify(node['value'])
             content = (
                 f"Property '{name}' was updated. "
                 f"From {old_value} to {new_value}"
